@@ -4,13 +4,26 @@ public class AdminDetails {
 
     private String email;
     private String password;
+    private boolean token = false;
 
-    public void setValues(String email, String password) {
+    public void setCredentials(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean getToken() {
+        return token;
+    }
+
+    public void setToken() {
+        token = true;
     }
 }
