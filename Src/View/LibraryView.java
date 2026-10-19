@@ -17,20 +17,6 @@ public class LibraryView {
         return choice;
     }
 
-    public String getEmail() {
-        System.out.println("Enter you email");
-        String email = scanner.nextLine();
-
-        return email;
-    }
-
-    public String getPassword() {
-        System.out.println("enter your password");
-        String password = scanner.nextLine();
-        return password;
-
-    }
-
     public void showMessage(String message) {
         System.out.print("\n");
         System.out.println(message);

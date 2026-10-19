@@ -1,109 +1,47 @@
 package Src.Controller;
 
+import Src.View.AuthView;
 import Src.View.LibraryView;
-import Src.Model.AdminDetails;
-import Src.View.BookView;
-import Src.Model.Book;
-import Src.Model.Library;
 
 public class LibraryController {
 
-    private LibraryView libraryView = new LibraryView();
-    private AdminDetails admin = new AdminDetails();
-    private BookView bookView = new BookView();
-    private Library library = new Library();
+    private AuthView authView;
 
-    private boolean login() {
+    private BookController bookController;
+    private LibraryView libraryView;
 
-        String email = libraryView.getEmail();
-        String password = libraryView.getPassword();
+    public LibraryController(AuthView authView, BookController bookController, LibraryView libraryView) {
 
-        String adminEmail = admin.getEmail();
-        String adminPassword = admin.getPassword();
-
-        if ((adminEmail == null) || (adminPassword == null))
-            libraryView.showMessage("Please register first");
-
-        else if (adminEmail.equals(email) && adminPassword.equals(password)) {
-            admin.setToken();
-            libraryView.showMessage("Welcome to librarymangemt");
-            return true;
-
-        } else {
-            libraryView.showMessage("Please Check your email & passwaord");
-        }
-
-        return false;
-
+        this.authView = authView;
+        this.bookController = bookController;
+        this.libraryView = libraryView;
     }
 
-    private void register() {
-        String email = libraryView.getEmail();
-        String password = libraryView.getPassword();
-        if (email == null || password == null) {
-            libraryView.showMessage("Please enter valid email and password");
-            return;
-        }
-        admin.setCredentials(email, password);
-        libraryView.showMessage("Registered Successfully");
+    void start() {
 
-    }
-
-    private void addBook() {
-        String bookId = bookView.getBookId();
-        String bookAuthor = bookView.getBookAuthor();
-        String bookName = bookView.getBookName();
-
-        Book book = new Book(bookId, bookName, bookAuthor, "Available");
-
-        library.addBook(book);
-
-    }
-
-    private void removeBook() {
-        String bookId = bookView.getBookId();
-        library.removeBook(bookId);
-    }
-
-    private void displayMainMenu() {
-        libraryView.displayMainMenu();
-
-        int choice = libraryView.getChoice();
-
-        switch (choice) {
-
-            case 1:
-                addBook();
-                break;
-            case 2:
-                removeBook();
-            default:
-                System.out.println("Invalid Choice Please try again");
-        }
-    }
-
-    public void start() {
         while (true) {
-            libraryView.displayEntryMenu();
+            libraryView.displayMainMenu();
+
             int choice = libraryView.getChoice();
 
             switch (choice) {
-                case 1:
-                    if (login()) {
-                        displayMainMenu();
-                        return;
-                    }
 
+                case 1:
+                    bookController.addBook();
                     break;
                 case 2:
-                    register();
+                    bookController.removeBook();
                     break;
                 case 3:
+                    bookController.findBookById();
+                    break;
+                case 4:
                     return;
-
                 default:
-                    System.out.println("Invalid choice. Please try again");
+                    System.out.println("Invalid Choice Please try again");
+
             }
+
         }
 
     }

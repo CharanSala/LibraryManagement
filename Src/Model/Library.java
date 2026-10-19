@@ -5,23 +5,36 @@ import Src.Model.Book;
 
 public class Library {
 
-    private ArrayList<Book> library = new ArrayList<>();
+    private ArrayList<Book> books = new ArrayList<>();
 
     public void addBook(Book book) {
-        library.add(book);
+        books.add(book);
     }
 
     public boolean removeBook(String bookId) {
 
-        for (int i = 0; i < library.size(); i++) {
-            Book book = library.get(i);
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
 
             if (book.getBookId().equals(bookId)) {
-                library.remove(i);
+                books.remove(i);
 
                 return true;
             }
         }
+        return false;
+    }
+
+    public Book findBookById(String bookId) {
+        Book book;
+        for (int i = 0; i < books.size(); i++) {
+            book = books.get(i);
+            if (book.getBookId().equals(bookId)) {
+                return book;
+            }
+        }
+
+        return null;
     }
 
 }
