@@ -3,7 +3,7 @@ package Src.Main;
 import Src.Controller.AuthController;
 import Src.Controller.BookController;
 import Src.Controller.LibraryController;
-import Src.Model.AdminDetails;
+import Src.Model.AdminAccount;
 import Src.Model.Library;
 import Src.View.BookView;
 import Src.View.AuthView;
@@ -13,7 +13,7 @@ class LibraryManagement {
     public static void main(String args[]) {
 
         Library library = new Library();
-        AdminDetails admin = new AdminDetails();
+        AdminAccount admin = new AdminAccount();
         AuthView authView = new AuthView();
         BookView bookView = new BookView();
         LibraryView libraryView = new LibraryView();

@@ -1,6 +1,6 @@
 package Src.Model;
 
-public class AdminDetails {
+public class AdminAccount {
 
     private String email;
     private String password;

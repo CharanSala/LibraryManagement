@@ -1,18 +1,18 @@
 package Src.Controller;
 
 import Src.View.AuthView;
-import Src.Model.AdminDetails;
+import Src.Model.AdminAccount;
 import Src.Controller.LibraryController;
 import Src.View.LibraryView;
 
 public class AuthController {
 
     private AuthView authView;
-    private AdminDetails admin;
+    private AdminAccount admin;
     private LibraryController libraryController;
     private LibraryView libraryView;
 
-    public AuthController(AuthView authView, AdminDetails admin, LibraryController libraryController,
+    public AuthController(AuthView authView, AdminAccount admin, LibraryController libraryController,
             LibraryView libraryView) {
         this.authView = authView;
         this.admin = admin;
