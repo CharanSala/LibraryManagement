@@ -2,6 +2,7 @@ package Src.Controller;
 
 import Src.View.AuthView;
 import Src.View.LibraryView;
+import Src.Controller.StudentController;
 
 public class LibraryController {
 
@@ -9,6 +10,7 @@ public class LibraryController {
 
     private BookController bookController;
     private LibraryView libraryView;
+    private StudentController studentController;
 
     public LibraryController(AuthView authView, BookController bookController, LibraryView libraryView) {
 
@@ -36,7 +38,11 @@ public class LibraryController {
                     bookController.findBookById();
                     break;
                 case 4:
-                    return;
+                    studentController.addStudent();
+                    break;
+                case 5:
+                    studentController.removeStudent();
+                    break;
                 default:
                     System.out.println("Invalid Choice Please try again");
 

@@ -18,4 +18,10 @@ public class StudentController {
 
     }
 
+    public void removeStudent() {
+        String studentId = studentView.readStudentId();
+        boolean status = library.removeStudent(studentId);
+
+    }
+
 }

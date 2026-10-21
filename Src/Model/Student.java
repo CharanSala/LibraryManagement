@@ -11,4 +11,12 @@ public class Student {
 
     }
 
+    public String getStudentId() {
+        return this.studentId;
+    }
+
+    public String getStudentName() {
+        return this.studentName;
+    }
+
 }

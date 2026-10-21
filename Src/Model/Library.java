@@ -43,4 +43,16 @@ public class Library {
         students.add(student);
     }
 
+    public boolean removeStudent(Student studentId) {
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            if (student.getStudentId().equals(studentId)) {
+                students.remove(i);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 }
