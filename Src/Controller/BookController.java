@@ -1,5 +1,7 @@
 package Src.Controller;
 
+import java.util.ArrayList;
+
 import Src.Model.Book;
 import Src.Model.Library;
 import Src.View.BookView;
@@ -40,6 +42,14 @@ public class BookController {
         String bookId = bookView.getBookId();
         Book book = library.findBookById(bookId);
         bookView.displayBook(book);
+
+    }
+
+    public void displayAllBooks() {
+        ArrayList<Book> books = library.displayAllBooks();
+        for (int i = 0; i < books.size(); i++) {
+            bookView.displayBook(books.get(i));
+        }
 
     }
 

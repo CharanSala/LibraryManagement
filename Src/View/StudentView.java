@@ -1,6 +1,7 @@
 package Src.View;
 
 import java.util.Scanner;
+import Src.Model.Student;
 
 public class StudentView {
 
@@ -20,6 +21,13 @@ public class StudentView {
 
         return studentName;
 
+    }
+
+    public void displayStudent(Student student) {
+
+        System.out.println("Student ID: " + student.getStudentId());
+        System.out.println("Student Name: " + student.getStudentName());
+        System.out.println("----------------------");
     }
 
 }

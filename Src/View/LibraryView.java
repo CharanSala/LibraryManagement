@@ -23,7 +23,8 @@ public class LibraryView {
     }
 
     public void displayMainMenu() {
-        System.out.println("1.Add Book 2.Remove Book 3.Display Book 4.Add Student");
+        System.out.println(
+                "1.Add Book 2.Remove Book 3.find book byid 4.Display All books 5.Add students 6. remove students 7.display All Students");
     }
 
 }

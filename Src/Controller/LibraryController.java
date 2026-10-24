@@ -7,16 +7,17 @@ import Src.Controller.StudentController;
 public class LibraryController {
 
     private AuthView authView;
-
     private BookController bookController;
     private LibraryView libraryView;
     private StudentController studentController;
 
-    public LibraryController(AuthView authView, BookController bookController, LibraryView libraryView) {
+    public LibraryController(AuthView authView, BookController bookController, LibraryView libraryView,
+            StudentController studentController) {
 
         this.authView = authView;
         this.bookController = bookController;
         this.libraryView = libraryView;
+        this.studentController = studentController;
     }
 
     void start() {
@@ -38,10 +39,16 @@ public class LibraryController {
                     bookController.findBookById();
                     break;
                 case 4:
-                    studentController.addStudent();
+                    bookController.displayAllBooks();
                     break;
                 case 5:
+                    studentController.addStudent();
+                    break;
+                case 6:
                     studentController.removeStudent();
+                    break;
+                case 7:
+                    studentController.displayAllStudents();
                     break;
                 default:
                     System.out.println("Invalid Choice Please try again");

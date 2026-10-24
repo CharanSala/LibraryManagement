@@ -43,7 +43,7 @@ public class Library {
         students.add(student);
     }
 
-    public boolean removeStudent(Student studentId) {
+    public boolean removeStudent(String studentId) {
         for (int i = 0; i < students.size(); i++) {
             Student student = students.get(i);
             if (student.getStudentId().equals(studentId)) {
@@ -53,6 +53,14 @@ public class Library {
         }
         return false;
 
+    }
+
+    public ArrayList<Book> displayAllBooks() {
+        return books;
+    }
+
+    public ArrayList<Student> displayAllStudents() {
+        return students;
     }
 
 }

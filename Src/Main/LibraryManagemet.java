@@ -8,6 +8,8 @@ import Src.Model.Library;
 import Src.View.BookView;
 import Src.View.AuthView;
 import Src.View.LibraryView;
+import Src.Controller.StudentController;
+import Src.View.StudentView;
 
 class LibraryManagement {
     public static void main(String args[]) {
@@ -17,11 +19,16 @@ class LibraryManagement {
         AuthView authView = new AuthView();
         BookView bookView = new BookView();
         LibraryView libraryView = new LibraryView();
+        StudentView studentView = new StudentView();
 
         BookController bookController = new BookController(bookView, library, libraryView);
 
-        LibraryController libraryController = new LibraryController(authView, bookController, libraryView);
+        StudentController studentController = new StudentController(studentView, library, libraryView);
+
+        LibraryController libraryController = new LibraryController(authView, bookController, libraryView,
+                studentController);
         AuthController authController = new AuthController(authView, admin, libraryController, libraryView);
+
         authController.start();
 
     }
