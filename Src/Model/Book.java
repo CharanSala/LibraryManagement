@@ -30,4 +30,7 @@ public class Book {
         return bookStatus;
     }
 
+    public void changeStatus() {
+        this.bookStatus = "Issued";
+    }
 }

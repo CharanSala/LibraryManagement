@@ -24,7 +24,7 @@ public class StudentController {
         String studentId = studentView.readStudentId();
         String studentName = studentView.readStudentName();
 
-        Student student = new Student(studentId, studentName);
+        Student student = new Student(studentId, studentName, null);
         library.addStudent(student);
 
     }

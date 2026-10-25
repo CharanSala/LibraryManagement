@@ -63,4 +63,34 @@ public class Library {
         return students;
     }
 
+    public Book checkBookStatus(String bookId) {
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            if (book.getBookStatus().equalsIgnoreCase("Available")) {
+                return books.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Student checkStudent(String studentId) {
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            if (student.getStudentId().equals(studentId)) {
+                return students.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void assignBookToStudent(String bookId, String studentId) {
+        Book book = checkBookStatus(bookId);
+        Student student = checkStudent(studentId);
+
+        if (book != null && student != null) {
+            book.changeStatus();
+            student.getAssignedBooks().add(book);
+        }
+    }
+
 }

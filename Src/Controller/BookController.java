@@ -6,12 +6,14 @@ import Src.Model.Book;
 import Src.Model.Library;
 import Src.View.BookView;
 import Src.View.LibraryView;
+import Src.View.StudentView;
 
 public class BookController {
 
     private BookView bookView;
     private Library library;
     private LibraryView libraryView;
+    private StudentView studentView = new StudentView();
 
     public BookController(BookView bookView, Library library, LibraryView libraryView) {
         this.bookView = bookView;
@@ -50,6 +52,13 @@ public class BookController {
         for (int i = 0; i < books.size(); i++) {
             bookView.displayBook(books.get(i));
         }
+
+    }
+
+    public void assignBookToStudnet() {
+        String bookId = bookView.getBookId();
+        String studentId = studentView.readStudentId();
+        library.assignBookToStudent(bookId, studentId);
 
     }
 

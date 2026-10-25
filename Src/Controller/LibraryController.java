@@ -42,12 +42,15 @@ public class LibraryController {
                     bookController.displayAllBooks();
                     break;
                 case 5:
-                    studentController.addStudent();
+                    bookController.assignBookToStudnet();
                     break;
                 case 6:
-                    studentController.removeStudent();
+                    studentController.addStudent();
                     break;
                 case 7:
+                    studentController.removeStudent();
+                    break;
+                case 8:
                     studentController.displayAllStudents();
                     break;
                 default:
