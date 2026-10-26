@@ -24,7 +24,7 @@ public class LibraryView {
 
     public void displayMainMenu() {
         System.out.println(
-                "1.Add Book 2.Remove Book 3.find book byid 4.Display All books 5.AssignBook 6.Add students 7. remove students 8.display All Students");
+                "1.Add Book 2.Remove Book 3.find book byid 4.Display All books 5.AssignBook 6.Unassign Book 7.Add students 8. remove students 9.display All Students");
     }
 
 }

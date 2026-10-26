@@ -62,4 +62,11 @@ public class BookController {
 
     }
 
+    public void unassignBookToStudnet() {
+        String bookId = bookView.getBookId();
+        String studentId = studentView.readStudentId();
+
+        library.unassignBookToStudnet(bookId, studentId);
+    }
+
 }

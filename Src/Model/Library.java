@@ -3,11 +3,13 @@ package Src.Model;
 import java.util.ArrayList;
 import Src.Model.Book;
 import Src.Model.Student;
+import Src.View.LibraryView;
 
 public class Library {
 
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<Student> students = new ArrayList<>();
+    private LibraryView libraryView = new LibraryView();
 
     public void addBook(Book book) {
         books.add(book);
@@ -63,10 +65,21 @@ public class Library {
         return students;
     }
 
-    public Book checkBookStatus(String bookId) {
+    public Book checkAvailableStatus(String bookId) {
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
-            if (book.getBookStatus().equalsIgnoreCase("Available")) {
+            if (book.getBookId().equals(bookId) && book.getBookStatus().equalsIgnoreCase("Available")) {
+                return books.get(i);
+            }
+
+        }
+        return null;
+    }
+
+    public Book checkIssuedStatus(String bookId) {
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            if (book.getBookId().equals(bookId) && book.getBookStatus().equalsIgnoreCase("Issued")) {
                 return books.get(i);
             }
         }
@@ -84,13 +97,25 @@ public class Library {
     }
 
     public void assignBookToStudent(String bookId, String studentId) {
-        Book book = checkBookStatus(bookId);
+        Book book = checkAvailableStatus(bookId);
         Student student = checkStudent(studentId);
 
         if (book != null && student != null) {
-            book.changeStatus();
+            book.changeStatus("Available");
             student.getAssignedBooks().add(book);
+        } else {
+            libraryView.showMessage("Book bot assigned");
         }
     }
 
+    public void unassignBookToStudnet(String bookId, String studentId) {
+        Book book = checkIssuedStatus(bookId);
+        Student student = checkStudent(studentId);
+
+        if (book != null && student != null) {
+            book.changeStatus("Issued");
+            student.getAssignedBooks().remove(book);
+        }
+
+    }
 }

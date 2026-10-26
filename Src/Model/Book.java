@@ -30,7 +30,10 @@ public class Book {
         return bookStatus;
     }
 
-    public void changeStatus() {
-        this.bookStatus = "Issued";
+    public void changeStatus(String presentStatus) {
+        if (presentStatus.equalsIgnoreCase("Available"))
+            this.bookStatus = "Issued";
+        else
+            this.bookStatus = "Available";
     }
 }

@@ -43,7 +43,6 @@ public class StudentView {
             if (book == null) {
                 continue;
             }
-
             System.out.println("Book ID: " + book.getBookId());
             System.out.println("Book Name: " + book.getBookName());
             System.out.println("Book Author: " + book.getBookAuthor());
