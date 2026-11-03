@@ -4,6 +4,7 @@ import Src.View.AuthView;
 import Src.Model.AdminAccount;
 import Src.Controller.LibraryController;
 import Src.View.LibraryView;
+import Src.DAO.AdminDao;
 
 public class AuthController {
 
@@ -11,6 +12,8 @@ public class AuthController {
     private AdminAccount admin;
     private LibraryController libraryController;
     private LibraryView libraryView;
+
+    private AdminDao adminDao = new AdminDao();
 
     public AuthController(AuthView authView, AdminAccount admin, LibraryController libraryController,
             LibraryView libraryView) {
@@ -25,23 +28,31 @@ public class AuthController {
         String email = authView.getEmail();
         String password = authView.getPassword();
 
-        String adminEmail = admin.getEmail();
-        String adminPassword = admin.getPassword();
+        if (email == null || password == null) {
 
-        if ((adminEmail == null) || (adminPassword == null))
-            libraryView.showMessage("Please register first");
-
-        else if (adminEmail.equals(email) && adminPassword.equals(password)) {
-            admin.setToken();
-            libraryView.showMessage("Welcome to librarymangemt");
-            return true;
-
-        } else {
-            libraryView.showMessage("Please Check your email & passwaord");
+            libraryView.showMessage("Please enter email and password");
+            return false;
         }
 
-        return false;
+        try {
+            String adminEmail = adminDao.login(email, password);
 
+            if (adminEmail != null) {
+                admin.setEmail(adminEmail);
+                libraryView.showMessage("Login successful");
+                return true;
+
+            } else {
+                libraryView.showMessage("Please Check your email or1 passwaord");
+                return false;
+            }
+        }
+
+        catch (Exception e) {
+            libraryView.showMessage("Database error. Please try again later.");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private void register() {
@@ -51,8 +62,18 @@ public class AuthController {
             libraryView.showMessage("Please enter valid email and password");
             return;
         }
-        admin.setCredentials(email, password);
-        libraryView.showMessage("Registered Successfully");
+        try {
+            boolean isRegistered = adminDao.register(email, password);
+            if (isRegistered) {
+                libraryView.showMessage("Registered Successfully");
+            } else {
+                libraryView.showMessage("Registration Failed");
+            }
+        } catch (Exception e) {
+            libraryView.showMessage("Database error during registration");
+            e.printStackTrace();
+
+        }
 
     }
 

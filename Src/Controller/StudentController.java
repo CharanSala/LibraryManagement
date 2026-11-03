@@ -7,12 +7,14 @@ import java.util.ArrayList;
 
 import Src.Model.Library;
 import Src.View.LibraryView;
+import Src.DAO.StudentDao;
 
 public class StudentController {
 
     private StudentView studentView;
     private Library library;
     private LibraryView libraryView;
+    private StudentDao studentDao = new StudentDao();
 
     public StudentController(StudentView studentView, Library library, LibraryView libraryView) {
         this.studentView = studentView;
@@ -24,22 +26,49 @@ public class StudentController {
         String studentId = studentView.readStudentId();
         String studentName = studentView.readStudentName();
 
-        Student student = new Student(studentId, studentName, null);
-        library.addStudent(student);
+        if (studentId == null || studentName == null) {
+            libraryView.showMessage("Please enter student details");
+            return;
+        }
+
+        try {
+            boolean isStudentadded = studentDao.addStudent(studentId, studentName);
+
+            if (isStudentadded)
+                libraryView.showMessage("Student added sucessfully");
+            else {
+                libraryView.showMessage("Unable to add student");
+            }
+        } catch (Exception e) {
+            libraryView.showMessage("Database error while creating the student");
+            e.printStackTrace();
+        }
 
     }
 
     public void removeStudent() {
         String studentId = studentView.readStudentId();
-        if (library.removeStudent(studentId))
-            libraryView.showMessage("Student removed Sucessfully");
-        else
-            libraryView.showMessage("Student not removed");
+
+        if (studentId == null) {
+            libraryView.showMessage("Please enter a valid student ID");
+            return;
+        }
+
+        try {
+            boolean isStudentremoved = studentDao.removeStudent(studentId);
+
+            if (isStudentremoved)
+                libraryView.showMessage("Studnet removed Sucessfully");
+            else
+                libraryView.showMessage("Student not removed");
+        } catch (Exception e) {
+            libraryView.showMessage("Database error while removing the student");
+        }
 
     }
 
     public void displayAllStudents() {
-        ArrayList<Student> students = library.displayAllStudents();
+        ArrayList<Student> students = studentDao.displayAllStudents();
         if (students.isEmpty()) {
             studentView.displayStudent(null);
             return;

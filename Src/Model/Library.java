@@ -96,16 +96,20 @@ public class Library {
         return null;
     }
 
-    public void assignBookToStudent(String bookId, String studentId) {
+    public boolean assignBookToStudent(String bookId, String studentId) {
         Book book = checkAvailableStatus(bookId);
         Student student = checkStudent(studentId);
 
         if (book != null && student != null) {
             book.changeStatus("Available");
             student.getAssignedBooks().add(book);
+
+            return false;
         } else {
             libraryView.showMessage("Book bot assigned");
         }
+
+        return true;
     }
 
     public void unassignBookToStudnet(String bookId, String studentId) {
